@@ -1,0 +1,18 @@
+{
+  "name": "ke-pm",
+  "owner": {
+    "name": "Kalkomey",
+    "url": "https://github.com/kalkomey"
+  },
+  "plugins": [
+    {
+      "name": "ke-pm",
+      "source": "./",
+      "description": "Kalkomey product management skills. Set up a KE project as a ClickUp List and write its Brief, following the Kalkomey playbook. ClickUp is the source of truth; the skills hold no state of their own.",
+      "version": "0.1.0",
+      "category": "workflow",
+      "tags": ["clickup", "product-management", "brief", "kalkomey"],
+      "strict": true
+    }
+  ]
+}

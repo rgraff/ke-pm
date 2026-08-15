@@ -1,0 +1,12 @@
+{
+  "name": "ke-pm",
+  "version": "0.1.0",
+  "description": "Kalkomey product management skills — set up a KE project in ClickUp and write its Brief, following the Kalkomey playbook",
+  "author": {
+    "name": "Robert Graff"
+  },
+  "repository": "https://github.com/kalkomey/ke-pm",
+  "keywords": ["clickup", "product-management", "brief", "kalkomey"],
+  "commands": "./commands/",
+  "skills": "./skills/"
+}
