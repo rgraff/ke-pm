@@ -4,7 +4,7 @@ A Brief exists and reality has moved. The update is surgical and visible.
 
 ---
 
-**User:** `/ke-pm:pm-project-brief` — the brief on the checkout project is out of date, we
+**User:** `/pm-project-brief` — the brief on the checkout project is out of date, we
 changed approach
 
 **Claude:** *(reads the List description and the existing `Brief`)*

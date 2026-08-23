@@ -4,7 +4,7 @@ The golden path: context in, interview, draft, style pass, publish.
 
 ---
 
-**User:** `/ke-pm:pm-project-brief` — here's the Slack thread where we decided to do this
+**User:** `/pm-project-brief` — here's the Slack thread where we decided to do this
 *(pastes 40 messages)*
 
 **Claude:** *(reads the List description)*

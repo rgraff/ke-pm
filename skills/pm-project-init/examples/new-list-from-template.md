@@ -6,13 +6,12 @@ roadmap call made explicit.
 
 ---
 
-**User:** `/ke-pm:pm-project-init` we're going to fix the login flow on HuntWise
+**User:** `/pm-project-init` we're going to fix the login flow on HuntWise
 
 **Claude:**
 > ✅ ClickUp connected as Robert Graff.
-> ⚠️ Slack is not connected. Nothing in `/ke-pm:pm-project-init` or `/ke-pm:pm-project-brief` needs it,
-> so we can carry on — but `/ke-pm:update` and `/ke-pm:standup` will not be able
-> to post when they arrive.
+> ⚠️ Slack is not connected. Nothing in `/pm-project-init` or `/pm-project-brief` needs it,
+> so we can carry on — worth sorting before the first weekly update is due.
 >
 > Which squad owns this KE project?
 
@@ -152,7 +151,7 @@ roadmap call made explicit.
 > HuntWise login flow" to match the List. Put the List URL in its knowledge along
 > with whatever you are working from — support tickets, notes, transcripts.
 >
-> Then run the `/ke-pm:*` commands from inside it. They read the facts from
+> Then run the `ke-pm` commands from inside it. They read the facts from
 > ClickUp either way, but the extra context makes the Brief better. Keep
 > decisions flowing back to ClickUp though — one that only exists in a Claude
 > conversation is invisible to the squad.
@@ -169,7 +168,7 @@ roadmap call made explicit.
 
 **User:** yes, start it
 
-**Claude:** *(invokes `ke-pm:pm-project-brief` via the Skill tool)*
+**Claude:** *(invokes `pm-project-brief` via the Skill tool)*
 
 ---
 

@@ -1,4 +1,4 @@
-# Edge cases — /ke-pm:pm-project-init
+# Edge cases — /pm-project-init
 
 ## The List description already holds the facts
 
@@ -55,7 +55,7 @@ are invisible afterwards.
 ## The user wants the Brief written now, in the same session
 
 Good — that is the intended flow. Finish `pm-project-init` first so the facts are
-on the List, then invoke `/ke-pm:pm-project-brief`. Do not write the Brief inside
+on the List, then invoke `/pm-project-brief`. Do not write the Brief inside
 `pm-project-init`; `pm-project-brief` has an interview to run and rules to apply that do not
 belong here.
 

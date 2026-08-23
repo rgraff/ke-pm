@@ -6,7 +6,7 @@ allowed-tools:
   - Skill
 ---
 
-Invoke the `ke-pm:pm-project-init` skill. Pass `$ARGUMENTS` through as the KE
+Invoke the `pm-project-init` skill. Pass `$ARGUMENTS` through as the KE
 project name or one-line idea.
 
 The workflow, ClickUp conventions, and worked examples live under

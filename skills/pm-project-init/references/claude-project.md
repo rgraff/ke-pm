@@ -32,11 +32,11 @@ it.
 > Then add to the project's knowledge:
 >
 > - The ClickUp List URL: `[url]`
-> - The `Brief`, once `/ke-pm:pm-project-brief` has written it
+> - The `Brief`, once `/pm-project-brief` has written it
 > - Anything you are working from: interview notes, transcripts, research,
 >   screenshots, links
 >
-> Run the `/ke-pm:*` commands from inside that Claude Project. They read the
+> Run the `ke-pm` commands from inside that Claude Project. They read the
 > facts from ClickUp either way, but the extra context makes the Brief and the
 > weekly updates better.
 >

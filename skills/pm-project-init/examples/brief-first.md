@@ -5,7 +5,7 @@ only for the rest.
 
 ---
 
-**User:** `/ke-pm:pm-project-init` — we wrote the brief for the Rangers weather
+**User:** `/pm-project-init` — we wrote the brief for the Rangers weather
 alerts thing last week, need it in ClickUp now
 
 **Claude:**
@@ -131,7 +131,7 @@ alerts thing last week, need it in ClickUp now
 
 **User:** yes, start it
 
-**Claude:** *(invokes `ke-pm:pm-project-brief` via the Skill tool)*
+**Claude:** *(invokes `pm-project-brief` via the Skill tool)*
 
 ---
 

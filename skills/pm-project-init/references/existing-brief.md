@@ -17,7 +17,7 @@ on some other List, a link you can read. If you cannot read a link, ask them to
 paste the text rather than guessing at the contents.
 
 If the answer is no, say that is fine and carry on. It gets written afterwards
-with `/ke-pm:pm-project-brief`.
+with `/pm-project-brief`.
 
 ## What to take from it
 
@@ -62,7 +62,7 @@ rollup. This is the last cheap moment to change it.
 
 Once the List exists, check the Brief against the standard before doing anything
 with it. A Brief that already meets it should just be posted; one that does not
-should go to `/ke-pm:pm-project-brief` rather than be quietly fixed here.
+should go to `/pm-project-brief` rather than be quietly fixed here.
 
 ### The check
 
@@ -95,10 +95,10 @@ skipped.
 ### If it does not
 
 Name what is off — specifically, not "it does not match the template" — and
-point at `/ke-pm:pm-project-brief`:
+point at `/pm-project-brief`:
 
 > This is close, but there is no `Users` section and the `Background` section is
-> not part of the template. Run `/ke-pm:pm-project-brief` and it will work from what you
+> not part of the template. Run `/pm-project-brief` and it will work from what you
 > have written rather than starting over.
 
 Do not fix it yourself, and do not post it as-is. If the user insists on posting

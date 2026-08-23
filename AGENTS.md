@@ -4,7 +4,7 @@
 
 Claude Code skills for running a KE project the way the Kalkomey playbook
 describes. Phase 1 covers setting the KE project up in ClickUp
-(`/ke-pm:pm-project-init`) and writing its Brief (`/ke-pm:pm-project-brief`). Either can come
+(`/pm-project-init`) and writing its Brief (`/pm-project-brief`). Either can come
 first — neither skill may assume the other has already run.
 
 Read [GLOSSARY.md](GLOSSARY.md) before writing any skill prose. "Project" alone
@@ -35,12 +35,12 @@ reorganisation should not break a skill.
 
 ```
 .claude-plugin/
-├── plugin.json            # name: ke-pm → /ke-pm:* namespace
+├── plugin.json            # plugin name: ke-pm (skills are NOT namespaced)
 └── marketplace.json       # claude plugin marketplace add kalkomey/ke-pm
 
 commands/                  # thin wrappers — invoke the matching skill, nothing else
-├── pm-project-init.md     # → /ke-pm:pm-project-init
-└── pm-project-brief.md    # → /ke-pm:pm-project-brief
+├── pm-project-init.md     # → /pm-project-init
+└── pm-project-brief.md    # → /pm-project-brief
 
 skills/
 ├── pm-project-init/

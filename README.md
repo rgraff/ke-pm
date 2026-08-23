@@ -32,8 +32,8 @@ so this repo is strict about which one it means. See [GLOSSARY.md](GLOSSARY.md).
 
 | Command | What it does |
 |---|---|
-| `/ke-pm:pm-project-init` | Verify connections, settle the KE project's name, walk you through creating its ClickUp List from the standard template, and record its facts in the List description. Run once per KE project. |
-| `/ke-pm:pm-project-brief` | Interview you, then write the project `Brief` doc on the List. |
+| `/pm-project-init` | Verify connections, settle the KE project's name, walk you through creating its ClickUp List from the standard template, and record its facts in the List description. Run once per KE project. |
+| `/pm-project-brief` | Interview you, then write the project `Brief` doc on the List. |
 
 **Run them in either order.** Set the List up first and the Brief reads its
 facts instead of asking. Write the Brief first and `pm-project-init` takes what it
@@ -44,11 +44,11 @@ it has both.
 
 ```
 ClickUp List  (the KE project)
-├── description  ← /ke-pm:pm-project-init   owner, squad, roadmap or not,
+├── description  ← /pm-project-init   owner, squad, roadmap or not,
 │                                original + current target, capitalizable
 ├── due date     ← you, by hand         a copy of the current target,
 │                                so ClickUp's roadmap views can sort
-└── Brief (doc)  ← /ke-pm:pm-project-brief  Summary, Problem, Goals, Users, Approach,
+└── Brief (doc)  ← /pm-project-brief  Summary, Problem, Goals, Users, Approach,
                                  Open Questions & Risks
 ```
 
@@ -59,7 +59,7 @@ would be clutter in a place meant for team documents.
 ### You create the List, not Claude
 
 The ClickUp MCP server has no template tools: it cannot list templates and
-cannot create a List from one. So `/ke-pm:pm-project-init` settles the names,
+cannot create a List from one. So `/pm-project-init` settles the names,
 hands you a link that opens ClickUp's template center on the right template,
 tells you which Folder to put it in and exactly what to call it, and waits. You
 click **Use template**, paste the List URL back, and the skill carries on —
@@ -84,7 +84,7 @@ failure mode this process exists to avoid.
 ClickUp holds the record. The Claude Project holds the workbench: transcripts,
 research notes, Slack threads, the raw material you are working from.
 
-`/ke-pm:pm-project-init` cannot create a Claude Project — no skill can — so it explains how
+`/pm-project-init` cannot create a Claude Project — no skill can — so it explains how
 to set one up and what to keep in it. Nothing in `ke-pm` requires one; the
 skills read everything they need from ClickUp. It just makes the drafts better.
 
@@ -95,7 +95,7 @@ goes to ClickUp.
 
 ### ClickUp — required
 
-Everything depends on it. `/ke-pm:pm-project-init` stops if it is missing.
+Everything depends on it. `/pm-project-init` stops if it is missing.
 
 How it gets there depends on where you are running:
 
@@ -121,9 +121,9 @@ means it needs authorizing, the server absent means it needs configuring.
 
 ### Slack — checked, not required
 
-`/ke-pm:pm-project-init` reports whether Slack tooling is reachable, because the skills
-planned for phase 2 (`/ke-pm:update`, `/ke-pm:standup`) post there. Neither
-`pm-project-init` nor `pm-project-brief` needs it, so a missing Slack connection is a warning, never a
+`/pm-project-init` reports whether Slack tooling is reachable, because the weekly
+project update and stand-ups live there. Neither `pm-project-init` nor
+`pm-project-brief` needs it, so a missing Slack connection is a warning, never a
 blocker.
 
 > **Setup note:** the exact Slack MCP endpoint is not yet pinned down for

@@ -5,7 +5,7 @@ facts and touches nothing else.
 
 ---
 
-**User:** `/ke-pm:pm-project-init` — the Rangers offline maps project is already in ClickUp,
+**User:** `/pm-project-init` — the Rangers offline maps project is already in ClickUp,
 I just want the facts recorded on it
 
 **Claude:**
@@ -73,7 +73,7 @@ I just want the facts recorded on it
 **User:** not now, I need to pull up the original thread
 
 **Claude:**
-> Fine — `/ke-pm:pm-project-brief` is there when you have it.
+> Fine — `/pm-project-brief` is there when you have it.
 
 ---
 

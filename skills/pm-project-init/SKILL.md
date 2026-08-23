@@ -1,6 +1,6 @@
 ---
 name: pm-project-init
-description: Set up a KE project in ClickUp — verify the ClickUp and Slack connections, walk the user through creating the project's List from the standard template, and record the project's facts in the List description. Use when starting a new KE project, when adopting an existing ClickUp List into the ke-pm workflow, or when a Brief has been written and now needs a home in ClickUp. Triggers on 'set this up in ClickUp', 'create the List', 'start a new project', 'the brief is written, now what', '/ke-pm:pm-project-init'. Run once per KE project, before or after the Brief.
+description: Set up a KE project in ClickUp — verify the ClickUp and Slack connections, walk the user through creating the project's List from the standard template, and record the project's facts in the List description. Use when starting a new KE project, when adopting an existing ClickUp List into the ke-pm workflow, or when a Brief has been written and now needs a home in ClickUp. Triggers on 'set this up in ClickUp', 'create the List', 'start a new project', 'the brief is written, now what', '/pm-project-init'. Run once per KE project, before or after the Brief.
 argument-hint: "[KE project name or idea]"
 allowed-tools:
   - AskUserQuestion
@@ -17,11 +17,11 @@ allowed-tools:
   workflow.
 - Another `ke-pm` skill stopped because the KE project's facts are missing from
   the List.
-- The user explicitly invokes `/ke-pm:pm-project-init`.
+- The user explicitly invokes `/pm-project-init`.
 
 **Order does not matter.** A KE project can be set up in ClickUp first and
 briefed after, or briefed first and set up after. This skill handles both, and
-`/ke-pm:pm-project-brief` handles the mirror case. Run this once per KE project. Running it
+`/pm-project-brief` handles the mirror case. Run this once per KE project. Running it
 again on a List that already has its facts recorded is an update, not a
 re-scaffold — see `references/edge-cases.md`.
 
@@ -54,8 +54,8 @@ Follow `references/connections.md`. In short:
   authenticated ClickUp user — it confirms the connection resolves to a real
   account, and it is the name you offer as the owner in step 6.
 - **Slack** — `ToolSearch "+slack"`. If nothing comes back, **warn and
-  continue**: say that `/ke-pm:update` and `/ke-pm:standup` will not be able to
-  post when they arrive, and that nothing here or in `/ke-pm:pm-project-brief` needs it.
+  continue**: say it is worth sorting before the first weekly update is due, and
+  that nothing here or in `/pm-project-brief` needs it.
 
 Report both results in one short status line each before moving on. The user
 should know what is connected before they answer six questions.
@@ -72,7 +72,7 @@ link. Follow `references/existing-brief.md` for what to take from it and how far
 to trust it.
 
 If there is no Brief yet, say that is fine and carry on. It gets written after,
-with `/ke-pm:pm-project-brief`.
+with `/pm-project-brief`.
 
 ### 3. Identify the squad
 
@@ -246,7 +246,7 @@ that already meets the standard through an interview it does not need.
 
 **If it does not**, say specifically what is off — a missing `Users` section, a
 `Background` section that is not part of the template, requirements that belong
-on tasks — and offer to run `/ke-pm:pm-project-brief` to refine it. That skill
+on tasks — and offer to run `/pm-project-brief` to refine it. That skill
 owns the template, the section order, and the style pass. Do not fix it yourself
 here and do not post it as-is.
 
@@ -284,14 +284,14 @@ hear it now than the first week it is missed.
 is not ready to work, and ending on "run this next" leaves the person to
 re-summon the context they already have loaded. Ask with `AskUserQuestion` —
 "Ready to draft the Brief now?" against "Not now" — and on yes, invoke
-`ke-pm:pm-project-brief` through the `Skill` tool rather than describing it. The
+`pm-project-brief` through the `Skill` tool rather than describing it. The
 facts you just wrote are what it reads, so it starts warm.
 
 Make the same offer when step 8 found a Brief that did not meet the standard.
 Do not make it when the Brief is already published and correct — there is
 nothing to run, and offering anyway invites a pointless rewrite.
 
-Take "Not now" at face value. Say `/ke-pm:pm-project-brief` is there when they
+Take "Not now" at face value. Say `/pm-project-brief` is there when they
 want it, and stop.
 
 ## Output

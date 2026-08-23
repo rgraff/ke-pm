@@ -5,7 +5,7 @@ be a scoping problem rather than a wording one.
 
 ---
 
-**User:** `/ke-pm:pm-project-brief` for "Improve Boat Ed onboarding"
+**User:** `/pm-project-brief` for "Improve Boat Ed onboarding"
 
 **Claude:** *(reads the List description)*
 > Before the interview — the name is worth a minute. "Improve Boat Ed

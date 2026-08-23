@@ -1,4 +1,4 @@
-# Troubleshooting — /ke-pm:pm-project-init
+# Troubleshooting — /pm-project-init
 
 Symptom → what is actually happening → what to do.
 
@@ -99,8 +99,8 @@ Same MCP gap as the missing template tools: ClickUp's REST API supports both
 So do not retry, and do not design around reading it. The List description is the
 only date record available — both target dates go there, and the due date is
 something you ask the user to set by hand. Say why it matters: every roadmap view
-in the workspace sorts and filters on that field, and `/ke-pm:update` maintains
-it as the current target from then on.
+in the workspace sorts and filters on that field, and it should be kept matching
+the current target from then on.
 
 Never report the due date as set, and never say it "already matches" — you cannot
 see it. If the user says it is set to something else, theirs is the truth and the
@@ -111,8 +111,8 @@ description follows it.
 **The user does not know the original target date.**
 Do not invent one and do not leave it blank — the weekly update's header math
 depends on it. Ask for their best committed date and record it. If they truly
-cannot commit yet, record `TBD` and tell them plainly that `/ke-pm:update` will
-not be able to report a slip until it is filled in.
+cannot commit yet, record `TBD` and tell them plainly that no slip can be
+reported against it until it is filled in.
 
 ---
 

@@ -133,8 +133,8 @@ in the final handoff that the template still needs applying.
 
 | What | Where | Written by |
 |---|---|---|
-| The KE project's facts | The List **description**, both target dates included — the record of truth. The List **due date** holds a copy of the current target, set by hand | `/ke-pm:pm-project-init` |
-| Problem, goals, approach | A doc named exactly `Brief` | `/ke-pm:pm-project-brief` |
+| The KE project's facts | The List **description**, both target dates included — the record of truth. The List **due date** holds a copy of the current target, set by hand | `/pm-project-init` |
+| Problem, goals, approach | A doc named exactly `Brief` | `/pm-project-brief` |
 
 `ke-pm` creates exactly one document, the `Brief`. The facts go on the List
 itself rather than into a second doc — a document that exists only so the

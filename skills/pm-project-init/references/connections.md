@@ -1,6 +1,6 @@
 # Connection checks
 
-`/ke-pm:pm-project-init` verifies two connections before it does anything else. The user
+`/pm-project-init` verifies two connections before it does anything else. The user
 should know what is wired up before they answer a single question.
 
 ## ClickUp — required, hard stop
@@ -46,7 +46,7 @@ and give the user the one-line test:
 > **`plugin:ke-pm:clickup`**.
 >
 > **If it is listed**, it just needs authorizing — approve it there, then run
-> `/ke-pm:pm-project-init` again. This is the usual case; the ClickUp server ships
+> `/pm-project-init` again. This is the usual case; the ClickUp server ships
 > with the plugin, so nothing needs configuring.
 >
 > **If it is not listed**, you are running the skills without the plugin
@@ -78,9 +78,10 @@ write. If a later step fails on permissions, see `troubleshooting.md`.
 ToolSearch(query: "+slack", max_results: 30)
 ```
 
-Slack is where the phase 2 skills post: `/ke-pm:update` posts the weekly project
-update to `#project-updates`, and `/ke-pm:standup` posts to `#standups`. Neither
-`/ke-pm:pm-project-init` nor `/ke-pm:pm-project-brief` touches Slack.
+Slack is where the weekly project update goes (`#project-updates`) and where
+stand-ups are threaded (`#standups`). Neither `/pm-project-init` nor
+`/pm-project-brief` touches Slack — they check it only so the user knows where
+they stand before those posts come due.
 
 So check it, report it, and move on:
 
@@ -88,9 +89,9 @@ So check it, report it, and move on:
 
 or
 
-> ⚠️ Slack is not connected. Nothing in `/ke-pm:pm-project-init` or `/ke-pm:pm-project-brief` needs
-> it, so we can carry on. When `/ke-pm:update` and `/ke-pm:standup` arrive they
-> will not be able to post until it is set up.
+> ⚠️ Slack is not connected. Nothing in `/pm-project-init` or `/pm-project-brief`
+> needs it, so we can carry on — worth sorting before the first weekly update is
+> due.
 
 Never stop the skill over Slack, and do not push the user to fix it now. They
 came here to set up a KE project.
@@ -105,4 +106,4 @@ costs five tool calls is worse than no check.
 
 > **Open setup question:** the Slack MCP endpoint for Kalkomey is not settled
 > yet. Until it is, probe for whatever Slack tooling is present and report what
-> you found by name. Pin this down before `/ke-pm:update` ships.
+> you found by name.

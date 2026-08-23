@@ -21,7 +21,7 @@ documents. Say which one you mean.
 Other terms used across the skills:
 
 - **The KE project's facts** — Owner, squad, roadmap designation, original and
-  current target dates, and capitalizable designation. `/ke-pm:pm-project-init`
+  current target dates, and capitalizable designation. `/pm-project-init`
   records them in the ClickUp List's own **description**, which is the record of
   truth for both dates — the MCP can neither read nor write the List's **due
   date**, so that field holds a copy of the current target, set by hand, purely so
@@ -43,7 +43,7 @@ Other terms used across the skills:
   setup, because it determines what is owed later.
 
 - **Brief** — A doc on the ClickUp List summarising the problem, goals, and
-  approach. Written by `/ke-pm:pm-project-brief`. Every KE project must have one. It
+  approach. Written by `/pm-project-brief`. Every KE project must have one. It
   replaces the PRD; it is not a spec.
 
 - **Capitalizable** — Whether the KE project's development costs can be recorded

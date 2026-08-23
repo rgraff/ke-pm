@@ -6,7 +6,7 @@ allowed-tools:
   - Skill
 ---
 
-Invoke the `ke-pm:pm-project-brief` skill. Pass `$ARGUMENTS` through as the KE project name
+Invoke the `pm-project-brief` skill. Pass `$ARGUMENTS` through as the KE project name
 or ClickUp List URL.
 
 The workflow, Brief template, naming rules, and writing style live under

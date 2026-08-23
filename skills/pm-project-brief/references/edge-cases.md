@@ -1,4 +1,4 @@
-# Edge cases — /ke-pm:pm-project-brief
+# Edge cases — /pm-project-brief
 
 ## The user hands you a PRD or a big spec
 
@@ -63,7 +63,7 @@ persuasive than a pitch. Then hand the user the markdown and suggest keeping it
 in the Claude Project until there is a decision.
 
 Do not push them toward ClickUp, and do not treat the missing List as a problem
-to solve. When the work is greenlit, `/ke-pm:pm-project-init` sets the List up and
+to solve. When the work is greenlit, `/pm-project-init` sets the List up and
 takes most of what it needs from the Brief that already exists.
 
 ## A live KE project's Brief is being kept somewhere private

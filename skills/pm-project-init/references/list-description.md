@@ -1,6 +1,6 @@
 # Where the KE project's facts live
 
-`/ke-pm:pm-project-init` records the KE project's facts on the ClickUp List itself. There
+`/pm-project-init` records the KE project's facts on the ClickUp List itself. There
 is no separate document — the facts sit in the List's own description, in List
 Info, where anyone who opens the List sees them.
 
@@ -90,8 +90,8 @@ left blank or guessed.
 the slip, which is the one thing the weekly update exists to show.
 
 **Current target** — today's best estimate. Changes as often as needed; there is
-no judgment in moving it. `/ke-pm:update` maintains it here, and the List's due
-date is kept matching it by hand so roadmap views can sort on it.
+no judgment in moving it. It is maintained here, and the List's due date is kept
+matching it by hand so roadmap views can sort on it.
 
 **Capitalizable** — designated during planning, between Product, Engineering,
 and Accounting. `ke-pm` records the designation; it never makes it. If the user
