@@ -64,16 +64,31 @@ alerts thing last week, need it in ClickUp now
 > 21 characters, inside the limit, and it is what people already say. Using it.
 
 **Claude:**
-> Templates available: **KE Project — Standard** (`t-901419142237`, expected
-> default), Marketing Campaign, Bug Triage. Standard?
+> I cannot create a List from a template — the ClickUp MCP has no template tools
+> yet. Quick in the UI though:
+>
+> 1. Open it: https://app.clickup.com/9014033846/home?templateCenter=open&templateId=t-901419142237&templateType=subcategory
+> 2. Click **Use template**
+> 3. Destination: **team-product** → **wg-rangers**
+> 4. Name it exactly: `Rangers storm alerts`
+>
+> If the link does not land on it, it is called **Product Roadmap Project
+> Template**. Paste the List URL back when it exists.
+
+**User:** https://app.clickup.com/9014033846/v/li/901409876543
+
+**Claude:** *(fetches the List)*
+> Got it — right name, right Folder, empty description.
+>
+> Now the facts. The Brief says end of October — is 2026-10-31 the date that was
+> committed at kickoff?
 
 **User:** yes
 
-**Claude:** *(creates the List from the template)*
-> Now the facts. The Brief says end of October — is 2026-10-31 the committed
-> date?
+**Claude:**
+> And is today's estimate still 2026-10-31, or has it already moved?
 
-**User:** yes
+**User:** still the same
 
 **Claude:**
 > Owner is Robert Graff — right, or someone else?
@@ -89,22 +104,34 @@ alerts thing last week, need it in ClickUp now
 **Claude:**
 > Then a weekly update in `#project-updates` is required once work starts.
 >
-> Capitalizable?
+> Last one — capitalizable.
+
+*(offers via AskUserQuestion, with the four criteria as context)*
 
 **User:** yes
 
-**Claude:** *(shows the proposed description, gets confirmation, writes it, sets
-the due date to 2026-10-31)*
-> Facts are on the List: `https://app.clickup.com/…`
+**Claude:** *(shows the proposed description, gets confirmation, writes it)*
+> Facts are on the List: `https://app.clickup.com/…`, both target dates included.
+> Set the List due date to 2026-10-31 by hand — the MCP cannot write it on a
+> List that already exists, and roadmap views sort on it.
 >
 > Your Brief is not on the List yet. I checked it against the standard: the six
 > sections are mostly there, but there is no `Users` section and it has a
 > `Background` section that is not part of the template.
 >
-> If it matched, I would just post it. Since it does not, run `/ke-pm:pm-project-brief` —
-> it will work from what you have written rather than starting over.
+> If it matched, I would just post it. Since it does not, the Brief skill will
+> work from what you have written rather than starting over.
 
-**User:** ok, running that next
+*(offers via AskUserQuestion)*
+
+> Ready to run it now?
+>
+> - **Yes, start it**
+> - **Not now**
+
+**User:** yes, start it
+
+**Claude:** *(invokes `ke-pm:pm-project-brief` via the Skill tool)*
 
 ---
 

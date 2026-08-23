@@ -20,11 +20,14 @@ documents. Say which one you mean.
 
 Other terms used across the skills:
 
-- **The KE project's facts** — Owner, squad, original target,
-  and capitalizable designation. `/ke-pm:pm-project-init` records them in
-  the ClickUp List's own **description**, and puts the projected target in the
-  List's **due date**. There is no separate document: the facts live on the List,
-  where the whole team can see them. Every later skill reads them from there.
+- **The KE project's facts** — Owner, squad, roadmap designation, original and
+  current target dates, and capitalizable designation. `/ke-pm:pm-project-init`
+  records them in the ClickUp List's own **description**, which is the record of
+  truth for both dates — the MCP can neither read nor write the List's **due
+  date**, so that field holds a copy of the current target, set by hand, purely so
+  ClickUp's roadmap views can sort on it. There is no separate document: the facts
+  live on the List, where the whole team can see them. Every later skill reads
+  them from there.
 
 - **Milestone** — A segment of a large piece of work. `ke-pm` steers away from
   ClickUp's Milestone task type: when work is too big for one KE project, the

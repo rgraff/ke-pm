@@ -39,7 +39,7 @@ When Slack is not connected, use the table and say it may be out of date.
 | Agency Operations | `:wg-rangers:` |
 | Marketing Acquisition | `:wg-funnel-experimentation:` |
 | Interactive | `:wg-boat-ed:` |
-| LMS | `:wg-slignshot:` |
+| LMS | `:wg-slingshot:` |
 | GovSuite | `:wg-agency-solutions:` |
 | Platform | `:wg-platform:` |
 | Data Engineering | `:wg-data-engineering:` |
@@ -48,6 +48,11 @@ The emoji names lag the squad names — `:wg-rangers:` belongs to Agency
 Operations, `:wg-funnel-experimentation:` to Marketing Acquisition,
 `:wg-agency-solutions:` to GovSuite. That is expected and correct. Renaming a
 Slack emoji breaks every post that already uses it, so the old names stay.
+
+That applies to names that are *out of date*, not to names that look *misspelled*.
+Every emoji in this table is spelled the way Slack has it. If one looks like a
+typo, it is a typo in this file — say so and let it be corrected. Do not tell the
+user a misspelling is deliberate; that is how a broken emoji survives a review.
 
 ## When the squad is not in the table
 

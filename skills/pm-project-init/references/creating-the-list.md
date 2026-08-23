@@ -113,25 +113,27 @@ link opens the template center empty, on the wrong template, or not at all, they
 can search **Product Roadmap Project Template** and carry on without coming back
 to ask.
 
-Record it in the List description's `Template applied:` line. The MCP cannot read
-which template a List was built from, so that line is the only place the name
-survives between sessions. Write what they actually used — if they say they
-picked something else, record that instead of the default.
+Nothing about the template gets recorded here. The MCP cannot read which
+template a List was built from, so this skill does not ask and does not write it
+down — a fact nobody can verify is not worth a line in the description. The
+skills that actually need the template's structure will check for it when they
+run, against what they need rather than against a name.
 
 ## Taking the URL back
 
 The user pastes something like:
 
 ```
-https://app.clickup.com/9014033846/v/li/901412345678
+https://app.clickup.com/9014033846/v/l/li/901419145644
 ```
 
-The last path segment is the List ID. Accept the other shapes too — ClickUp
-appends view IDs and query strings, and users paste from the address bar:
+**Take the last numeric segment as the List ID.** Do not match on a fixed path
+shape — ClickUp uses several and adds to them. All of these are the same List:
 
-- `…/v/li/901412345678`
-- `…/v/li/901412345678/…?block=…`
-- `…/v/l/901412345678` — an older form, same meaning
+- `…/v/l/li/901419145644` — what `clickup_get_list` itself returns
+- `…/v/li/901419145644`
+- `…/v/l/901419145644`
+- any of the above with a view id or `?block=…` appended
 
 If you cannot find a numeric ID in what they pasted, say so and ask them to
 open the List and copy the URL from the address bar. Do not guess at an ID and
@@ -139,17 +141,17 @@ do not search by name hoping to land on it.
 
 ## Confirm it before writing anything
 
-Fetch the List with `clickup_get_list` and check three things:
+Fetch the List with `clickup_get_list` and check two things:
 
 - **The name matches** what you asked them to type. Close is not a match. If it
   differs, show both and ask which is right — they may have improved on it, or
   they may have created it in the wrong place and renamed something else.
 - **It is in the confirmed Folder.** A List created one Folder over shows up
   wrong in rollups and is annoying to move later. Say so now, while it is empty.
-- **It has the template's structure.** If it came back with no custom statuses
-  and no views beyond the default, the template probably did not get applied.
-  Ask before proceeding rather than recording `Template applied:` for a template
-  that is not there.
+Do not interrogate the template. Whether it was applied cleanly is not something
+the MCP can tell you, and asking the user to confirm it produces an answer that
+is recorded nowhere and checked by nothing. The skills that depend on the
+template's views and statuses will find out for themselves.
 
 ## Then: initialize or update
 
@@ -177,10 +179,10 @@ Offer the fallback explicitly and let them choose:
 > I can create it bare instead — right name, right Folder, no template. You would
 > apply the template yourself later. Want me to?
 
-If they take it, create the List with `clickup_create_list_in_folder`, record
-`Template applied: none (apply manually)` in the description, and say plainly
-that the template still needs applying. Do not let that line go unrecorded — it
-is the only trace that the List is incomplete.
+If they take it, create the List with `clickup_create_list_in_folder` and say
+plainly, in the handoff at the end, that the template still needs applying. Say
+it where they will see it — it is the one thing about the List that is
+incomplete, and nothing downstream is going to remind them.
 
 If the template is missing for everyone rather than just this user, that is worth
 saying out loud once: a template that has been deleted or unshared will fail the

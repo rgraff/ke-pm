@@ -73,9 +73,9 @@ shared with their account, or they may be on mobile where the template center is
 harder to reach.
 
 Offer the bare-List fallback and let them pick: Claude creates it with the right
-name in the right Folder, they apply the template later. Record
-`Template applied: none (apply manually)` either way — that line is the only
-trace that the List is incomplete.
+name in the right Folder, they apply the template later. Say so again in the
+final handoff — an untemplated List is the one thing about the setup that is
+incomplete, and it is not recorded anywhere.
 
 If the template is missing for everyone rather than just this user, say it once.
 A deleted or unshared template fails the same way for every KE project set up

@@ -8,17 +8,32 @@ Info, where anyone who opens the List sees them.
 
 | Fact | Where it lives |
 |---|---|
-| Projected target date | The List's **due date** |
+| Both target dates | The List **description** — the record of truth |
 | Everything else | The List **description** |
+| A copy of the current target | The List's **due date**, set by the user, for ClickUp's views |
 
-The projected target goes in the native due date because it changes often and
-because ClickUp can sort and filter on it — a date buried in description text is
-invisible to every view in the workspace.
+**Both target dates go in the description**, on separate lines. ClickUp has one
+date field per List, so it cannot hold two, and the pair only means something
+together: the original is committed once and never moves, the current one tracks
+today's estimate, and the gap between them is the slip. Recording only one erases
+the ability to tell whether the commitment held.
 
-The original target stays in the description as text. ClickUp has no second date
-field for it, and it must not be confused with the due date: the original is
-committed once and never moves, while the due date tracks today's estimate. The
-gap between them is the slip, and the weekly update reports both.
+**The description is the record; the due date is a copy.** That is the way round
+it has to be, because the MCP can neither read the due date nor write it (see
+`troubleshooting.md`). A field no skill can see cannot be the source of anything
+— every later skill reads the dates from these lines.
+
+The copy still earns its place: the List's native due date is what every roadmap
+view in the workspace sorts and filters on, and a date living only in description
+text is invisible to them. Ask the user to set it to the current target and say
+why. Never report it as set, and never treat it as authoritative when it
+disagrees with the description — you cannot see it to compare.
+
+**The description is the only date record the skill can see.** So when it already
+holds target dates, confirm those rather than asking cold — and ask for the
+original before the current one when it does not. Someone asked for "the target
+date" gives today's estimate, and recording that as the original quietly erases
+whatever slip has already accumulated.
 
 ## The description block
 
@@ -27,9 +42,9 @@ gap between them is the slip, and the weekly update reports both.
 **Owner:** [who owns this KE project]
 **Squad:** [squad] :wg-emoji:
 **Roadmap project:** Yes | No
-**Original target:** YYYY-MM-DD (committed; the List due date holds today's estimate)
+**Original target:** YYYY-MM-DD (committed at kickoff; never changes)
+**Current target:** YYYY-MM-DD (today's estimate; set the List due date to match)
 **Capitalizable:** Yes | No | Not yet designated
-**Template applied:** [template name, or "none (apply manually)"]
 **Set up:** YYYY-MM-DD by [name]
 ```
 
@@ -74,8 +89,9 @@ left blank or guessed.
 **Original target** — the committed date. It never changes. Editing it erases
 the slip, which is the one thing the weekly update exists to show.
 
-**Projected target (List due date)** — today's best estimate. Changes as often
-as needed; there is no judgment in moving it. `/ke-pm:update` maintains it.
+**Current target** — today's best estimate. Changes as often as needed; there is
+no judgment in moving it. `/ke-pm:update` maintains it here, and the List's due
+date is kept matching it by hand so roadmap views can sort on it.
 
 **Capitalizable** — designated during planning, between Product, Engineering,
 and Accounting. `ke-pm` records the designation; it never makes it. If the user
@@ -93,10 +109,3 @@ name.
 Use the name as it appears in ClickUp so it matches the person tasks get
 assigned to.
 
-**Template applied** — the ClickUp MCP cannot read which template a List was
-built from, so this is whatever the user told you when they reported back from
-creating it. That makes this line the only place the template's name survives
-between sessions — do not leave it blank because you could not verify it
-yourself. Record the template name, or `none (apply manually)` when the List was
-created bare. This is how someone later works out why a List is missing its
-views.

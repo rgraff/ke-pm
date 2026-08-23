@@ -65,15 +65,6 @@ writing facts to it is worse than asking again.
 
 ---
 
-**The List comes back with no custom statuses or views.**
-The template probably did not get applied — the user may have hit **Blank** in
-the picker. Say what you are seeing and ask before recording
-`Template applied:`. If they would rather not redo it, record
-`Template applied: none (apply manually)` and move on; do not record a template
-name you cannot see evidence of.
-
----
-
 **The List the user pasted is in a different Folder than the one confirmed.**
 Say so before writing anything. It is empty now, so moving it costs nothing;
 after the facts and the Brief land it shows up wrong in rollups until someone
@@ -90,6 +81,30 @@ existing List instead.
 
 **The List description already holds the facts.**
 This is a re-run, not a fresh setup. See `edge-cases.md`.
+
+---
+
+**You cannot read or set the List's due date.**
+Expected, in both directions, and worth knowing before you promise anything:
+
+- `clickup_update_list` accepts `name`, `content`, and `status`. No `due_date`.
+  The parameter exists only on `clickup_create_list`, at creation time, and
+  `pm-project-init` does not create Lists.
+- `clickup_get_list` returns id, name, content, space, url, and statuses. **No
+  dates.** There is no way to see what the due date currently says.
+
+Same MCP gap as the missing template tools: ClickUp's REST API supports both
+(`PUT /api/v2/list/{list_id}` takes `due_date`), the server does not expose them.
+
+So do not retry, and do not design around reading it. The List description is the
+only date record available — both target dates go there, and the due date is
+something you ask the user to set by hand. Say why it matters: every roadmap view
+in the workspace sorts and filters on that field, and `/ke-pm:update` maintains
+it as the current target from then on.
+
+Never report the due date as set, and never say it "already matches" — you cannot
+see it. If the user says it is set to something else, theirs is the truth and the
+description follows it.
 
 ---
 

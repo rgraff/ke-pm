@@ -42,8 +42,9 @@ trees, and view pickers, all of which truncate. A 40-character name shows up as
 "Address UX issues in Hunt…" everywhere it matters, which defeats the point of
 writing a careful name.
 
-Keep the List name to **18–22 characters, ideally 20**. When the KE
-project name is longer than that, propose a short form.
+Keep the List name to **20–26 characters**. When the KE project name is longer
+than that, propose a short form. Under 20 is fine when the name is genuinely
+that short — the range is a ceiling to work under, not a length to pad to.
 
 ### Abbreviating well
 
@@ -76,10 +77,10 @@ rewordings of the same idea:
 |---|---|
 | The brand | `HW login flow UX` (16) |
 | The outcome | `HW login friction` (18) |
-| The surface | `HW login page fix` (17) |
+| The surface | `HW login page rework` (20) |
 
 Show the character count with each, and always leave room for the user to type
-their own. Take what they write as-is; push back only if it runs well past 22
+their own. Take what they write as-is; push back only if it runs well past 26
 characters, and then only once.
 
 If nothing fits, the KE project name may be doing too much. That is worth

@@ -45,8 +45,9 @@ it has both.
 ```
 ClickUp List  (the KE project)
 ├── description  ← /ke-pm:pm-project-init   owner, squad, roadmap or not,
-│                                original target, capitalizable
-├── due date     ← /ke-pm:pm-project-init   the projected target
+│                                original + current target, capitalizable
+├── due date     ← you, by hand         a copy of the current target,
+│                                so ClickUp's roadmap views can sort
 └── Brief (doc)  ← /ke-pm:pm-project-brief  Summary, Problem, Goals, Users, Approach,
                                  Open Questions & Risks
 ```

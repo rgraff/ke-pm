@@ -119,20 +119,21 @@ Always give the template's name alongside the link. The link is the fast path;
 the name is what the user searches for when it misfires, and the template center
 lists templates by name only.
 
-Record it in the List description's `Template applied:` line — the MCP cannot
-read which template a List came from, so that line is the only place it survives
-between sessions.
+The template is not recorded anywhere. The MCP cannot read which template a List
+was built from, so `pm-project-init` neither asks nor writes it down — a fact
+nobody can verify does not belong in the description. Skills that need the
+template's views and statuses check for what they need when they run.
 
 Never create the List bare just to keep moving. A template-less List looks
 identical to a correct one until someone needs a view that is not there. If the
-user cannot reach the template, offer to create it bare, let them choose, and
-record `Template applied: none (apply manually)` so the gap is visible.
+user cannot reach the template, offer to create it bare, let them choose, and say
+in the final handoff that the template still needs applying.
 
 ## Where things are written on a List
 
 | What | Where | Written by |
 |---|---|---|
-| The KE project's facts | The List **description**, plus the List **due date** for the projected target | `/ke-pm:pm-project-init` |
+| The KE project's facts | The List **description**, both target dates included — the record of truth. The List **due date** holds a copy of the current target, set by hand | `/ke-pm:pm-project-init` |
 | Problem, goals, approach | A doc named exactly `Brief` | `/ke-pm:pm-project-brief` |
 
 `ke-pm` creates exactly one document, the `Brief`. The facts go on the List

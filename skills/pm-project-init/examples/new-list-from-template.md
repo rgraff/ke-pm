@@ -53,7 +53,7 @@ roadmap call made explicit.
 
 > - `HW login flow UX` (16) — leads with the brand
 > - `HW login friction` (18) — leads with the outcome
-> - `HW login page fix` (17) — leads with the surface
+> - `HW login page rework` (20) — leads with the surface
 
 **User:** HW login friction
 
@@ -94,20 +94,40 @@ roadmap call made explicit.
 **Claude:**
 > Recorded. That means a weekly update is required once work starts.
 >
-> What is the original target date — the committed one? It gets recorded once
-> and never changes, so a slip stays visible later.
+> Two dates next. I cannot read the List's due date — the MCP does not return
+> it — so both come from you. What was the original committed target, the one
+> agreed at kickoff? It gets recorded once and never changes, which is what keeps
+> a slip visible later.
 
 **User:** end of September, say the 30th
 
 **Claude:**
-> 2026-09-30, projected the same for now.
->
-> Is this KE project capitalizable?
+> 2026-09-30 as the original. Is today's estimate still the same date, or has it
+> already moved?
 
-**User:** not sure
+**User:** same, we just started
 
 **Claude:**
-> Recording "Not yet designated" — worth confirming with your PM, since it
+> Both recorded as 2026-09-30. They will diverge the first time it slips, and
+> that gap is what the weekly update reports.
+>
+> Last one — capitalizable.
+
+*(offers via AskUserQuestion, with the criteria as context)*
+
+> All four have to hold: identifiable and discrete scope, management committed to
+> completing it, useful life of 3+ years, tangible future benefit. It is
+> designated during planning between Product, Engineering, and Accounting — I do
+> not decide it here, and I am not reading it off the roadmap answer either.
+>
+> - **Yes**
+> - **No**
+> - **Not yet designated**
+
+**User:** not yet designated
+
+**Claude:**
+> Recorded as "Not yet designated" — worth confirming with your PM, since it
 > affects the monthly finance report.
 >
 > Here is the description I will write on the List:
@@ -116,11 +136,16 @@ roadmap call made explicit.
 
 **User:** looks right
 
-**Claude:** *(writes the description, sets the List due date to 2026-09-30)*
+**Claude:** *(writes the description)*
 > Done.
 >
 > - List: `https://app.clickup.com/…`
-> - Facts are in the List description; projected target is the List due date.
+> - Both target dates are in the List description.
+>
+> One thing I could not do: set the List's due date to 2026-09-30. The MCP can
+> neither read nor write that field — please set it by hand in List Info. Every
+> roadmap view in the workspace sorts and filters on it, so a List without one
+> goes missing from them.
 >
 > One more thing, which I cannot do for you: set up a Claude Project for this KE
 > project. In Claude, **Projects** → **New project**, named "Address UX issues in
@@ -132,7 +157,19 @@ roadmap call made explicit.
 > decisions flowing back to ClickUp though — one that only exists in a Claude
 > conversation is invisible to the squad.
 >
-> Next: `/ke-pm:pm-project-brief`. The KE project is not ready to work until it has one.
+> There is no Brief yet, and the KE project is not ready to work until it has
+> one.
+
+*(offers via AskUserQuestion)*
+
+> Ready to draft the Brief now?
+>
+> - **Yes, start it**
+> - **Not now**
+
+**User:** yes, start it
+
+**Claude:** *(invokes `ke-pm:pm-project-brief` via the Skill tool)*
 
 ---
 
@@ -151,4 +188,16 @@ roadmap call made explicit.
   visibly applied, description empty — before anything gets written.
 - The template is given twice: as a link that opens it, and by name in case the
   link misfires. One round trip saved for the cost of one sentence.
-- "Not sure" about capitalizable is recorded honestly, not guessed.
+- The original is asked for before the current one, and both are recorded —
+  identical at kickoff, which is the point: they diverge on the first slip.
+  Asking for "the target date" in one question gets today's estimate and loses
+  the commitment.
+- The one thing the MCP could not do — set the due date — is stated as an action
+  for the user, with the reason, rather than buried or skipped.
+- Capitalizable is a real question with the four criteria attached, and "not yet
+  designated" is a first-class answer rather than a failure to decide. It is not
+  inferred from the roadmap answer — that is a different question.
+- Nothing is asked about the template. Claude cannot verify it, so it is not
+  recorded and not confirmed.
+- The Brief is offered and started, not named and left. The session already holds
+  the context it needs.

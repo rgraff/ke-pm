@@ -5,6 +5,7 @@ argument-hint: "[KE project name or idea]"
 allowed-tools:
   - AskUserQuestion
   - Read
+  - Skill
   - ToolSearch
 ---
 
@@ -113,7 +114,7 @@ because they just made one — take it now and skip straight to resolving it.
   name that has only ever been a document title has never had to stand on its
   own in a report. Renaming later is worse than getting it right now. Offer two
   or three candidates and let the user pick or refine.
-- **Then settle the List name.** If the KE project name is 20 characters or
+- **Then settle the List name.** If the KE project name is 26 characters or
   fewer, use it as-is and say so. If it is longer, the List needs a short form —
   and that is worth a real choice rather than a suggestion, because the List
   name is what the squad reads in the sidebar for the life of the KE project.
@@ -122,7 +123,7 @@ because they just made one — take it now and skip straight to resolving it.
   rewordings of one idea, following the abbreviation guidance in
   `references/naming-rules.md`. Give each one its character count and
   say what it leads with. The user can always type their own — take it as-is
-  unless it runs well past 22 characters, and even then say so only once.
+  unless it runs well past 26 characters, and even then say so only once.
 
   Frame the question against the full name so the trade-off is visible: the KE
   project is "Address UX issues in HuntWise login flow", 40 characters, which
@@ -137,10 +138,11 @@ because they just made one — take it now and skip straight to resolving it.
   Folder (the link cannot carry it), and the exact List name to type. Then stop
   and wait — do not gather facts for a List that does not exist yet.
 - **Take the URL back and resolve it.** The user pastes the List URL; pull the
-  List ID out of it and fetch the List. Confirm the name matches, that it landed
-  in the confirmed Folder, and that the template looks applied. Then read the
-  description: no fact block means a fresh List, carry on to step 6; a fact block
-  already there means this is an update — see `references/edge-cases.md`.
+  List ID out of it and fetch the List. Confirm the name matches and that it
+  landed in the confirmed Folder — do not interrogate the template, which the MCP
+  cannot see. Then read the description: no fact block means a fresh List, carry
+  on to step 6; a fact block already there means this is an update — see
+  `references/edge-cases.md`.
 - Do not create the List with `clickup_create_list_in_folder` as a shortcut. A
   template-less List looks identical to a correct one until someone needs a view
   that is not there. Creating bare is a fallback the user chooses when the
@@ -164,29 +166,68 @@ what is genuinely unanswered.
   project update in `#project-updates`; for everything else that update is
   optional. Do not infer it from how important the work sounds, and do not infer
   it from a Brief unless the Brief says so — ask.
-- **Original target date** — the committed date. Capture it now: it never
-  changes afterwards, and the weekly update's header math cannot be
-  reconstructed without it.
-- **Projected target date** — today's best estimate. Same as the original at
-  kickoff. This becomes the List's due date.
-- **Capitalizable** — yes or no, as designated during planning between Product,
-  Engineering, and Accounting. If the user does not know, record "not yet
-  designated" and tell them to confirm with their PM. Do not guess, and do not
-  designate it yourself.
+- **The two target dates.** The MCP cannot see the List's due date —
+  `clickup_get_list` returns the name, description, space, and statuses, and no
+  dates at all. So the description you read in step 5 is the only date record you
+  have. Branch on that, not on the List:
+
+  - **The description already holds target dates.** This is a re-run or an
+    adopt. Confirm them rather than asking cold: "Recorded as committed
+    2026-07-31, currently 2026-09-15 — has either moved?" Never regenerate the
+    original from today's date; see `references/edge-cases.md`.
+  - **No dates in the description.** Ask for the **original committed date**
+    first, on its own. Then ask whether today's estimate is still that date or
+    has already moved. Ask in that order: someone asked for "the target date"
+    gives today's estimate, and recording that as the original erases whatever
+    slip has already accumulated.
+
+  Say plainly that you cannot check the List's due date against what they told
+  you, so if the two disagree, theirs is what gets recorded.
+
+  Record **both** dates in the description. The original never changes again;
+  the current one moves as the KE project moves, and the gap between them is the
+  slip the weekly update reports. Two dates recorded separately is the only way a
+  later session can tell whether the commitment held.
+- **Capitalizable** — ask with `AskUserQuestion`, not as prose. It is a finance
+  designation with four specific criteria, and the honest answer is often "not
+  yet". Offer **Yes**, **No**, and **Not yet designated**, and give the criteria
+  as context so the user is answering the real question:
+
+  > Capitalizable projects must meet all four: identifiable and discrete scope,
+  > management committed to completing it, useful life of 3+ years, and tangible
+  > future benefit. It is designated during planning between Product,
+  > Engineering, and Accounting — not decided here.
+
+  **Do not connect this to the roadmap answer in either direction.** The
+  `Roadmap project` question above is about whether leadership tracks this in the
+  roadmap view and whether a weekly update is owed. The commitment criterion is a
+  finance judgment about whether management has committed to completing the work.
+  Plenty of committed, capitalizable work is not tracked on the roadmap, so a
+  "No" up there says nothing here.
+
+  Never designate it yourself, and never infer a Yes from the work sounding
+  substantial. If the answer is "Not yet designated", record that and tell them
+  to confirm with their PM.
 
 Ask in small groups, not one long interrogation.
 
 ### 7. Record the facts on the List
 
-Follow `references/list-description.md`. Two writes:
+Follow `references/list-description.md`.
 
-- **The List description** gets the fact block. Preserve any prose already
-  there — add or update the fact lines around it, never replace the whole
-  description.
-- **The List's due date** gets the projected target.
+**The List description** gets the fact block, both target dates included.
+Preserve any prose already there — add or update the fact lines around it, never
+replace the whole description. Show the user the full proposed description
+before writing, and get confirmation.
 
-Show the user the full proposed description before writing, and get
-confirmation.
+Both target dates go in that block. The description is the record of truth for
+them — the MCP can neither read the List's due date nor write it, and a field no
+skill can see cannot be the source of anything.
+
+**The List's due date** is a copy, kept for ClickUp's own views, which sort and
+filter on it. Ask the user once to set it to the current target, say why, and
+move on. Never report it as set and never treat it as authoritative — you cannot
+see it.
 
 If the MCP cannot write the description, say so and fall back to a doc named
 exactly `Project Details` on the List, as described in
@@ -205,12 +246,12 @@ that already meets the standard through an interview it does not need.
 
 **If it does not**, say specifically what is off — a missing `Users` section, a
 `Background` section that is not part of the template, requirements that belong
-on tasks — and point the user at `/ke-pm:pm-project-brief` to refine it. That skill owns
-the template, the section order, and the style pass. Do not fix it yourself
+on tasks — and offer to run `/ke-pm:pm-project-brief` to refine it. That skill
+owns the template, the section order, and the style pass. Do not fix it yourself
 here and do not post it as-is.
 
 If there is no Brief yet, say so plainly — the KE project is not ready to work
-until it has one, and `/ke-pm:pm-project-brief` is the next step.
+until it has one. Step 10 makes the offer to write it.
 
 ### 9. Set up the Claude Project
 
@@ -232,20 +273,35 @@ bother, drop it — nothing in `ke-pm` depends on it.
 
 ### 10. Confirm and hand off
 
-Report the List URL, then point at whichever step is actually next: writing the
-Brief, publishing the one they already have, or nothing further if it is already
-on the List.
+Report the List URL and anything still outstanding — the due date they need to
+set by hand, the template if the List was created bare.
 
 If this is a roadmap project, say so here too: a weekly project update in
 `#project-updates` is required, starting the first week work begins. Better they
 hear it now than the first week it is missed.
 
+**Then offer the Brief, and start it if they say yes.** A KE project without one
+is not ready to work, and ending on "run this next" leaves the person to
+re-summon the context they already have loaded. Ask with `AskUserQuestion` —
+"Ready to draft the Brief now?" against "Not now" — and on yes, invoke
+`ke-pm:pm-project-brief` through the `Skill` tool rather than describing it. The
+facts you just wrote are what it reads, so it starts warm.
+
+Make the same offer when step 8 found a Brief that did not meet the standard.
+Do not make it when the Brief is already published and correct — there is
+nothing to run, and offering anyway invites a pointless rewrite.
+
+Take "Not now" at face value. Say `/ke-pm:pm-project-brief` is there when they
+want it, and stop.
+
 ## Output
 - A ClickUp List for the KE project — created by the user from the standard
   template, or adopted. This skill never creates it; see
   `references/creating-the-list.md` for why.
-- The KE project's facts in that List's description, and the projected target as
-  its due date.
+- The KE project's facts in that List's description, including both the original
+  and current target dates. That description is the record of truth for them; the
+  List's due date holds a copy of the current target, set by the user, because
+  the MCP can neither read nor write it.
 - Spoken guidance on setting up the user's Claude Project. Nothing is written
   there — no skill can.
 - Nothing written outside ClickUp. This skill creates no local files.
