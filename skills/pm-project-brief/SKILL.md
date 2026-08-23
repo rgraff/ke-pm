@@ -1,6 +1,6 @@
 ---
-name: brief
-description: Write or update the Brief doc on a KE project's ClickUp List, following the Kalkomey Brief template. Interviews the user before writing anything, validates the KE project name, drafts the six required sections, and applies the house writing style. Use when a KE project needs its Brief, when an existing Brief is stale, or when someone asks what a project is for. Triggers on 'write the brief', 'draft a project brief', 'the brief is out of date', 'name this project', '/ke-pm:brief'. Replaces the PRD — it is not a spec.
+name: pm-project-brief
+description: Write or update the Brief doc on a KE project's ClickUp List, following the Kalkomey Brief template. Interviews the user before writing anything, validates the KE project name, drafts the six required sections, and applies the house writing style. Use when a KE project needs its Brief, when an existing Brief is stale, or when someone asks what a project is for. Triggers on 'write the brief', 'draft a project brief', 'the brief is out of date', 'name this project', '/ke-pm:pm-project-brief'. Replaces the PRD — it is not a spec.
 argument-hint: "[KE project name or ClickUp List URL]"
 allowed-tools:
   - AskUserQuestion
@@ -13,7 +13,7 @@ allowed-tools:
 - A KE project is being briefed before it exists in ClickUp at all.
 - An existing Brief no longer matches reality and needs updating.
 - The user wants help naming a KE project (the name rules live here).
-- The user explicitly invokes `/ke-pm:brief`.
+- The user explicitly invokes `/ke-pm:pm-project-brief`.
 
 Every KE project must have a Brief. It sizes up the problem, why it matters, and
 the shape of the work — and stops there.
@@ -25,14 +25,21 @@ Brief either way.
 ## Inputs
 - Required: nothing. The interview can start from a blank page.
 - Useful: a ClickUp List for the KE project, and the facts
-  `/ke-pm:clickup-init` records in its description — they save you asking.
+  `/ke-pm:pm-project-init` records in its description — they save you asking.
 - Optional `$ARGUMENTS`: KE project name or List URL.
 - Optional and very useful: Slack threads, transcripts, emails, docs, support
   data, analytics, research. Step 2 asks for these one kind at a time rather
   than waiting to be handed them.
 
-Read [GLOSSARY.md](../../GLOSSARY.md) for **KE project** / **ClickUp List** /
-**Claude Project**. Use those terms exactly; never say "project" alone.
+Three different things get called "project", so this skill never says the word
+alone:
+
+- **KE project** — a project as the playbook defines it: bounded scope, one
+  owner, an expected delivery window. The unit this skill briefs.
+- **ClickUp List** — where a KE project lives in ClickUp. One KE project = one
+  List. "The List" always means this.
+- **Claude Project** — a project inside Claude, holding context for one KE
+  project. Nothing is stored there.
 
 ## Workflow
 
@@ -44,12 +51,12 @@ situations, all fine:
 **The List exists and has its facts.** Read the description — owner, squad,
 whether this is a roadmap project, target dates, capitalizable designation — so
 you do not ask for any of it again. If the facts are not in the description,
-check for a `Project Details` doc, which is where `/ke-pm:clickup-init` falls
+check for a `Project Details` doc, which is where `/ke-pm:pm-project-init` falls
 back to. If there is already a `Brief` doc, read it: this is an update, and step
 6 handles it differently.
 
 **The List exists but has no facts.** Carry on with the Brief. Mention once that
-`/ke-pm:clickup-init` records the facts on the List, and leave it there — do not
+`/ke-pm:pm-project-init` records the facts on the List, and leave it there — do not
 turn the Brief into a setup session.
 
 **There is no List yet.** Also fine, and common: plenty of KE projects get
@@ -166,7 +173,7 @@ reasons for that, which want opposite handling. Ask which one this is:
   ClickUp. There is no KE project yet, so there is nothing to put a List on. Do
   not push toward ClickUp and do not treat the missing List as a problem to
   solve — see `references/edge-cases.md`.
-- **Greenlit, not set up yet.** Offer to run `/ke-pm:clickup-init` now: it sets
+- **Greenlit, not set up yet.** Offer to run `/ke-pm:pm-project-init` now: it sets
   the List up, and the Brief you just wrote answers most of what it would
   otherwise ask. Then publish.
 

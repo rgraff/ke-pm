@@ -1,11 +1,11 @@
 # Example — adopting an existing List
 
-The KE project already lives in ClickUp with tasks on it. `clickup-init` records the
+The KE project already lives in ClickUp with tasks on it. `pm-project-init` records the
 facts and touches nothing else.
 
 ---
 
-**User:** `/ke-pm:clickup-init` — the Rangers offline maps project is already in ClickUp,
+**User:** `/ke-pm:pm-project-init` — the Rangers offline maps project is already in ClickUp,
 I just want the facts recorded on it
 
 **Claude:**
@@ -53,7 +53,7 @@ I just want the facts recorded on it
 > Facts recorded on the List: `https://app.clickup.com/…`
 >
 > There is no `Brief` on this List. Since the KE project is already running,
-> `/ke-pm:brief` will ask what you understood the problem to be at the start —
+> `/ke-pm:pm-project-brief` will ask what you understood the problem to be at the start —
 > worth doing while people still remember.
 
 ---
@@ -62,6 +62,6 @@ I just want the facts recorded on it
 
 - A populated List gets adopted, not restructured, and no template is applied.
 - The original target stays at the missed date. This is the single most
-  important behaviour in `clickup-init`: regenerating it to today would erase the slip.
+  important behaviour in `pm-project-init`: regenerating it to today would erase the slip.
 - Existing docs are checked for before anything is written.
 - A late Brief is still worth writing, and the skill says why.

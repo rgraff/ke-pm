@@ -32,11 +32,11 @@ so this repo is strict about which one it means. See [GLOSSARY.md](GLOSSARY.md).
 
 | Command | What it does |
 |---|---|
-| `/ke-pm:clickup-init` | Verify connections, find or create the KE project's ClickUp List, and record its facts in the List description. Run once per KE project. |
-| `/ke-pm:brief` | Interview you, then write the project `Brief` doc on the List. |
+| `/ke-pm:pm-project-init` | Verify connections, settle the KE project's name, walk you through creating its ClickUp List from the standard template, and record its facts in the List description. Run once per KE project. |
+| `/ke-pm:pm-project-brief` | Interview you, then write the project `Brief` doc on the List. |
 
 **Run them in either order.** Set the List up first and the Brief reads its
-facts instead of asking. Write the Brief first and `clickup-init` takes what it
+facts instead of asking. Write the Brief first and `pm-project-init` takes what it
 can from the Brief, then offers to publish it. A KE project is ready to work when
 it has both.
 
@@ -44,16 +44,35 @@ it has both.
 
 ```
 ClickUp List  (the KE project)
-├── description  ← /ke-pm:clickup-init   owner, squad, roadmap or not,
+├── description  ← /ke-pm:pm-project-init   owner, squad, roadmap or not,
 │                                original target, capitalizable
-├── due date     ← /ke-pm:clickup-init   the projected target
-└── Brief (doc)  ← /ke-pm:brief  Summary, Problem, Goals, Users, Approach,
+├── due date     ← /ke-pm:pm-project-init   the projected target
+└── Brief (doc)  ← /ke-pm:pm-project-brief  Summary, Problem, Goals, Users, Approach,
                                  Open Questions & Risks
 ```
 
 `ke-pm` creates exactly one document, the `Brief`. The KE project's facts go on
 the List itself — a document that exists only so the tooling can read it back
 would be clutter in a place meant for team documents.
+
+### You create the List, not Claude
+
+The ClickUp MCP server has no template tools: it cannot list templates and
+cannot create a List from one. So `/ke-pm:pm-project-init` settles the names,
+hands you a link that opens ClickUp's template center on the right template,
+tells you which Folder to put it in and exactly what to call it, and waits. You
+click **Use template**, paste the List URL back, and the skill carries on —
+resolving the URL, checking the List landed where it should, and working out
+whether it still needs setting up or is a re-run.
+
+Keep that URL. The skills store nothing of their own, so a List URL is the whole
+handle: given it, any later session can read the List and tell where the KE
+project stands. That is why setup asks you to put it in your Claude Project's
+knowledge.
+
+ClickUp's REST API has supported creating a List from a template for years — the
+gap is in their MCP server. If they close it, the handoff disappears and the
+skill goes back to making the List itself.
 
 Nothing else. Task breakdown, sequencing, and acceptance criteria deliberately
 stay out — those belong on the tasks. A Brief that tries to be a spec is the
@@ -64,7 +83,7 @@ failure mode this process exists to avoid.
 ClickUp holds the record. The Claude Project holds the workbench: transcripts,
 research notes, Slack threads, the raw material you are working from.
 
-`/ke-pm:clickup-init` cannot create a Claude Project — no skill can — so it explains how
+`/ke-pm:pm-project-init` cannot create a Claude Project — no skill can — so it explains how
 to set one up and what to keep in it. Nothing in `ke-pm` requires one; the
 skills read everything they need from ClickUp. It just makes the drafts better.
 
@@ -75,39 +94,53 @@ goes to ClickUp.
 
 ### ClickUp — required
 
-Everything depends on it. `/ke-pm:clickup-init` stops if it is missing.
+Everything depends on it. `/ke-pm:pm-project-init` stops if it is missing.
 
-The repo ships a `.mcp.json` pointing at ClickUp's hosted MCP server. If you are
-running these skills from somewhere else, add the same block to that project's
-`.mcp.json`:
+How it gets there depends on where you are running:
 
-```json
-{
-  "mcpServers": {
-    "clickup": { "type": "http", "url": "https://mcp.clickup.com/mcp" }
+- **Installed as a Claude Code plugin** — the server ships with the plugin and
+  registers as `plugin:ke-pm:clickup`. Nothing to configure; run `/mcp` to
+  authorize it.
+- **claude.ai** — the plugin manifest is ignored. Add
+  `https://mcp.clickup.com/mcp` as a custom Connector in settings.
+- **Running from source with `--plugin-dir`** — the repo's own `.mcp.json`
+  covers you inside this directory. Elsewhere, add the block by hand:
+
+  ```json
+  {
+    "mcpServers": {
+      "clickup": { "type": "http", "url": "https://mcp.clickup.com/mcp" }
+    }
   }
-}
-```
+  ```
 
-Restart Claude Code and approve the server when prompted.
+Restart Claude Code and approve the server when prompted. If `pm-project-init`
+reports no ClickUp, `/mcp` tells you which case you are in: the server listed
+means it needs authorizing, the server absent means it needs configuring.
 
 ### Slack — checked, not required
 
-`/ke-pm:clickup-init` reports whether Slack tooling is reachable, because the skills
+`/ke-pm:pm-project-init` reports whether Slack tooling is reachable, because the skills
 planned for phase 2 (`/ke-pm:update`, `/ke-pm:standup`) post there. Neither
-`clickup-init` nor `brief` needs it, so a missing Slack connection is a warning, never a
+`pm-project-init` nor `pm-project-brief` needs it, so a missing Slack connection is a warning, never a
 blocker.
 
 > **Setup note:** the exact Slack MCP endpoint is not yet pinned down for
-> Kalkomey. Until it is, `clickup-init` probes for whatever Slack tooling is present and
+> Kalkomey. Until it is, `pm-project-init` probes for whatever Slack tooling is present and
 > reports what it found. Fill this section in once we settle on a server.
 
 ## Installing
+
+### Claude Code
 
 ```bash
 claude plugin marketplace add kalkomey/ke-pm
 claude plugin install ke-pm@ke-pm
 ```
+
+The ClickUp MCP server ships with the plugin and registers as
+`plugin:ke-pm:clickup`. It still needs authorizing once — run `/mcp`, approve
+it, and start a new session — before any skill can reach ClickUp.
 
 To try it without installing:
 
@@ -115,6 +148,30 @@ To try it without installing:
 git clone git@github.com:kalkomey/ke-pm.git ~/tools/ke-pm
 claude --plugin-dir ~/tools/ke-pm
 ```
+
+### The Claude app (claude.ai)
+
+claude.ai does not read the plugin manifest. Each skill is uploaded on its own,
+as a zip:
+
+```bash
+./scripts/package.sh
+```
+
+That writes `dist/pm-project-init.zip` and `dist/pm-project-brief.zip`. Upload each
+at **Settings → Capabilities → Skills**.
+
+Two differences from Claude Code:
+
+- **No slash commands.** `commands/` is a Claude Code concept. The skills trigger
+  from their descriptions — say what you want ("set this project up in ClickUp",
+  "write the brief") and the right one activates.
+- **ClickUp does not come along.** The plugin's `.mcp.json` is ignored, so add
+  `https://mcp.clickup.com/mcp` as a **custom Connector** in claude.ai settings.
+  Without it, `pm-project-init` stops at its connection check.
+
+Each skill folder is self-contained so the zips work standalone. That is why
+`naming-rules.md` exists twice — see [AGENTS.md](AGENTS.md).
 
 ## Where the process comes from
 

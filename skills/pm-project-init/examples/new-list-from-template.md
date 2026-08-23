@@ -1,15 +1,16 @@
 # Example — new KE project, new List
 
 Shows the golden path: both connection checks, name validation before creation,
-template discovery, and the roadmap call made explicit.
+the handoff that lets the user create the List from the template, and the
+roadmap call made explicit.
 
 ---
 
-**User:** `/ke-pm:clickup-init` we're going to fix the login flow on HuntWise
+**User:** `/ke-pm:pm-project-init` we're going to fix the login flow on HuntWise
 
 **Claude:**
 > ✅ ClickUp connected as Robert Graff.
-> ⚠️ Slack is not connected. Nothing in `/ke-pm:clickup-init` or `/ke-pm:brief` needs it,
+> ⚠️ Slack is not connected. Nothing in `/ke-pm:pm-project-init` or `/ke-pm:pm-project-brief` needs it,
 > so we can carry on — but `/ke-pm:update` and `/ke-pm:standup` will not be able
 > to post when they arrive.
 >
@@ -57,19 +58,28 @@ template discovery, and the roadmap call made explicit.
 **User:** HW login friction
 
 **Claude:**
+> Here is the one thing I cannot do for you. The ClickUp MCP has no template
+> tools, so I cannot create a List from a template — but it is about thirty
+> seconds in the UI:
 >
-> Available List templates in the workspace:
+> 1. Open it: https://app.clickup.com/9014033846/home?templateCenter=open&templateId=t-901419142237&templateType=subcategory
+> 2. Click **Use template**
+> 3. Destination: **team-product** → **Product Delivery**
+> 4. Name it exactly: `HW login friction`
 >
-> 1. **KE Project — Standard** (`t-901419142237`) — expected default
-> 2. Marketing Campaign
-> 3. Bug Triage
+> If the link does not land on it, it is called **Product Roadmap Project
+> Template** — search the template center for that.
 >
-> Use the standard one?
+> Paste the List URL back here when it exists and I will take it from there.
 
-**User:** yes
+**User:** done — https://app.clickup.com/9014033846/v/li/901412345678
 
-**Claude:** *(creates the List, applies the template)*
-> Created. Now the facts for the List description. A few things I need.
+**Claude:** *(fetches the List)*
+> Got it. `HW login friction`, in Product Delivery, with the template's statuses
+> and views on it. Description is empty, so this is a fresh setup rather than a
+> re-run.
+>
+> Now the facts for the List description. A few things I need.
 >
 > Owner is Robert Graff — right, or is someone else taking this?
 
@@ -122,7 +132,7 @@ template discovery, and the roadmap call made explicit.
 > decisions flowing back to ClickUp though — one that only exists in a Claude
 > conversation is invisible to the squad.
 >
-> Next: `/ke-pm:brief`. The KE project is not ready to work until it has one.
+> Next: `/ke-pm:pm-project-brief`. The KE project is not ready to work until it has one.
 
 ---
 
@@ -134,5 +144,11 @@ template discovery, and the roadmap call made explicit.
 - The name gets fixed *before* the List exists.
 - The KE project name and the List name are settled separately, with the reason
   for the short form stated rather than silently applied.
-- The template list is shown even though a default exists.
+- Claude does not create the List. It hands over the template link, the
+  destination, and an exact name in one message, then stops — rather than
+  creating a template-less List and leaving the user to clean it up.
+- The pasted URL is resolved and checked — right name, right Folder, template
+  visibly applied, description empty — before anything gets written.
+- The template is given twice: as a link that opens it, and by name in case the
+  link misfires. One round trip saved for the cost of one sentence.
 - "Not sure" about capitalizable is recorded honestly, not guessed.

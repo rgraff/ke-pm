@@ -63,7 +63,7 @@ Whatever you are working on is **a single ClickUp List and a single KE
 project**. A KE project split off from something larger is just a KE project: it
 gets a name, facts, and a Brief like any other, and owes nothing extra. No
 parent-child linking between Lists, no rolled-up reporting, no
-milestone-specific fields. `clickup-init` never creates milestone tasks.
+milestone-specific fields. `pm-project-init` never creates milestone tasks.
 
 > The playbook's `organizing-tasks-in-clickup.md` describes the Milestone task
 > type as the way to segment a large project. Preferring separate KE projects is
@@ -84,31 +84,56 @@ found and ask. Do not guess.
 
 ## List templates
 
-Always discover and always show. Enumerate the workspace's available List
-templates through the ClickUp MCP, display the candidates by name, and let the
-user choose.
+> **MCP deficiency — revisit when ClickUp fixes it.** The ClickUp MCP server
+> exposes no template tools at all. Templates cannot be enumerated and a List
+> cannot be created from one. `clickup_create_list` and
+> `clickup_create_list_in_folder` accept a name, a destination, a description,
+> and a status — nothing else.
+>
+> ClickUp's REST API has had this for years
+> (`GET /api/v2/team/{team_id}/list_template`,
+> `POST /api/v2/folder/{folder_id}/list_template/{template_id}`), so this is a
+> hole in the MCP server rather than a product limitation. Using the REST API
+> would need an API token the MCP's OAuth does not expose. If template tools
+> appear in a future version of the server, the user handoff described in
+> `creating-the-list.md` collapses back into one tool call and should be deleted.
 
-The expected default is template `t-901419142237`. When it appears in the
-discovered list, mark it as the expected choice — but still show the full list,
-and still let the user pick something else. Never apply a template the user has
-not seen.
+Because of that, **the user creates the List, not Claude.** Claude settles the
+names, hands over a template-center deep link plus the destination and the exact
+List name, waits, and takes the List URL back. The full procedure — link
+construction, what to send, how to parse the URL, what to verify — is in
+`creating-the-list.md`.
 
-If the MCP cannot enumerate or apply templates:
+The expected default is **Product Roadmap Project Template**, `t-901419142237`.
+The template center opens straight to it:
 
-1. Say so plainly — do not pretend it worked.
-2. Create the List without a template.
-3. Tell the user to apply the template through the ClickUp UI.
-4. Record `Template applied: none (apply manually)` in the List description.
+```
+https://app.clickup.com/{workspace_id}/home?templateCenter=open&templateId={template_id}&templateType=subcategory
+```
 
-A silently template-less List looks identical to a correct one until someone
-needs a view that is not there.
+`templateType=subcategory` is what makes it a List template — ClickUp calls a
+List a "subcategory" internally. The link carries the template but not the
+destination, so name the Space and Folder in words alongside it.
+
+Always give the template's name alongside the link. The link is the fast path;
+the name is what the user searches for when it misfires, and the template center
+lists templates by name only.
+
+Record it in the List description's `Template applied:` line — the MCP cannot
+read which template a List came from, so that line is the only place it survives
+between sessions.
+
+Never create the List bare just to keep moving. A template-less List looks
+identical to a correct one until someone needs a view that is not there. If the
+user cannot reach the template, offer to create it bare, let them choose, and
+record `Template applied: none (apply manually)` so the gap is visible.
 
 ## Where things are written on a List
 
 | What | Where | Written by |
 |---|---|---|
-| The KE project's facts | The List **description**, plus the List **due date** for the projected target | `/ke-pm:clickup-init` |
-| Problem, goals, approach | A doc named exactly `Brief` | `/ke-pm:brief` |
+| The KE project's facts | The List **description**, plus the List **due date** for the projected target | `/ke-pm:pm-project-init` |
+| Problem, goals, approach | A doc named exactly `Brief` | `/ke-pm:pm-project-brief` |
 
 `ke-pm` creates exactly one document, the `Brief`. The facts go on the List
 itself rather than into a second doc — a document that exists only so the

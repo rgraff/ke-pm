@@ -1,4 +1,4 @@
-# Edge cases — /ke-pm:clickup-init
+# Edge cases — /ke-pm:pm-project-init
 
 ## The List description already holds the facts
 
@@ -12,9 +12,10 @@ has accumulated, which is the one thing the weekly update exists to make visible
 ## Adopting a List that is already full of tasks
 
 Fine, and common — plenty of KE projects start in ClickUp before anyone runs
-`ke-pm`. Adopt it as-is. Do not apply a template to a populated List (it can
-disturb existing views and statuses), and do not reorganise the tasks. Record
-the facts in the description and stop.
+`ke-pm`. Adopt it as-is. Do not reorganise the tasks, and do not suggest
+applying the template to it — on a populated List that can disturb existing
+views and statuses, and the tasks are already there under whatever structure the
+squad has been using. Record the facts in the description and stop.
 
 ## The user describes something that is not a KE project
 
@@ -53,9 +54,9 @@ are invisible afterwards.
 
 ## The user wants the Brief written now, in the same session
 
-Good — that is the intended flow. Finish `clickup-init` first so the facts are
-on the List, then invoke `/ke-pm:brief`. Do not write the Brief inside
-`clickup-init`; `brief` has an interview to run and rules to apply that do not
+Good — that is the intended flow. Finish `pm-project-init` first so the facts are
+on the List, then invoke `/ke-pm:pm-project-brief`. Do not write the Brief inside
+`pm-project-init`; `pm-project-brief` has an interview to run and rules to apply that do not
 belong here.
 
 ## The squad is not in the table
@@ -65,9 +66,29 @@ Take what the user gives you, record it, and tell them
 updating. Do not invent a team emoji — a plausible-looking emoji that belongs to
 nobody is worse in `#standups` than a missing one.
 
-## No template looks right
+## The user cannot find the template
 
-Show what you found, say none of them look like a fit, and ask. The user may
-know which one is correct, may want the List created bare, or may want to build
-a template first. All three are valid. Applying the closest-looking template
-because something had to be picked is not.
+Claude cannot see the picker, so take their word for it. The template may not be
+shared with their account, or they may be on mobile where the template center is
+harder to reach.
+
+Offer the bare-List fallback and let them pick: Claude creates it with the right
+name in the right Folder, they apply the template later. Record
+`Template applied: none (apply manually)` either way — that line is the only
+trace that the List is incomplete.
+
+If the template is missing for everyone rather than just this user, say it once.
+A deleted or unshared template fails the same way for every KE project set up
+after this one, and the person setting one up is the only one positioned to
+notice.
+
+## The user comes back with a List they already created
+
+Common, and fine — someone reads the handoff message, makes the List, and starts
+a fresh session before pasting the URL back. Take the URL, resolve it, and run
+the checks in `creating-the-list.md`. If the description already holds a fact
+block, this is an update rather than a fresh setup; see the top of this file.
+
+Do not insist on re-walking the naming steps for a List that already exists. If
+the name breaks the rules in `naming-rules.md`, say so once and let them decide
+whether renaming is worth it.

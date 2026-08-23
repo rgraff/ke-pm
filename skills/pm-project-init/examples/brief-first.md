@@ -5,7 +5,7 @@ only for the rest.
 
 ---
 
-**User:** `/ke-pm:clickup-init` — we wrote the brief for the Rangers weather
+**User:** `/ke-pm:pm-project-init` — we wrote the brief for the Rangers weather
 alerts thing last week, need it in ClickUp now
 
 **Claude:**
@@ -101,7 +101,7 @@ the due date to 2026-10-31)*
 > sections are mostly there, but there is no `Users` section and it has a
 > `Background` section that is not part of the template.
 >
-> If it matched, I would just post it. Since it does not, run `/ke-pm:brief` —
+> If it matched, I would just post it. Since it does not, run `/ke-pm:pm-project-brief` —
 > it will work from what you have written rather than starting over.
 
 **User:** ok, running that next

@@ -1,6 +1,6 @@
 # Setting up the Claude Project
 
-A skill cannot create a Claude Project — there is no tool for it. What `clickup-init`
+A skill cannot create a Claude Project — there is no tool for it. What `pm-project-init`
 can do is tell the user how to set one up and what to keep in it, which is worth
 doing once, at setup, rather than leaving them to work it out.
 
@@ -32,7 +32,7 @@ it.
 > Then add to the project's knowledge:
 >
 > - The ClickUp List URL: `[url]`
-> - The `Brief`, once `/ke-pm:brief` has written it
+> - The `Brief`, once `/ke-pm:pm-project-brief` has written it
 > - Anything you are working from: interview notes, transcripts, research,
 >   screenshots, links
 >

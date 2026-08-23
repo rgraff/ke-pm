@@ -1,6 +1,6 @@
 # Where the KE project's facts live
 
-`/ke-pm:clickup-init` records the KE project's facts on the ClickUp List itself. There
+`/ke-pm:pm-project-init` records the KE project's facts on the ClickUp List itself. There
 is no separate document — the facts sit in the List's own description, in List
 Info, where anyone who opens the List sees them.
 
@@ -89,10 +89,14 @@ it out on the grounds that the List is already named — an abbreviation is not 
 name.
 
 **Owner** — who owns this KE project end to end. Defaults to whoever is running
-`clickup-init`, taken from the authenticated ClickUp account and confirmed, not assumed.
+`pm-project-init`, taken from the authenticated ClickUp account and confirmed, not assumed.
 Use the name as it appears in ClickUp so it matches the person tasks get
 assigned to.
 
-**Template applied** — record the template name, or `none (apply manually)` when
-the MCP could not apply one. This is how someone later works out why a List is
-missing its views.
+**Template applied** — the ClickUp MCP cannot read which template a List was
+built from, so this is whatever the user told you when they reported back from
+creating it. That makes this line the only place the template's name survives
+between sessions — do not leave it blank because you could not verify it
+yourself. Record the template name, or `none (apply manually)` when the List was
+created bare. This is how someone later works out why a List is missing its
+views.

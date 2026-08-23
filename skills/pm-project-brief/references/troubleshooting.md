@@ -1,20 +1,20 @@
-# Troubleshooting — /ke-pm:brief
+# Troubleshooting — /ke-pm:pm-project-brief
 
 Symptom → what is actually happening → what to do.
 
 ---
 
 **The List exists but has no facts on it.**
-`/ke-pm:clickup-init` has not been run for this KE project. Do not stop, and do
+`/ke-pm:pm-project-init` has not been run for this KE project. Do not stop, and do
 not reconstruct the facts by asking — the roadmap call and the capitalizable
-designation are decisions, not trivia, and `clickup-init` asks them properly.
-Write the Brief, mention `/ke-pm:clickup-init` once, and move on.
+designation are decisions, not trivia, and `pm-project-init` asks them properly.
+Write the Brief, mention `/ke-pm:pm-project-init` once, and move on.
 
 ---
 
 **No ClickUp List for this KE project at all.**
 Fine — the Brief often comes first. Run the interview from a blank page and
-handle the landing in step 6: offer `/ke-pm:clickup-init`, and if the user is
+handle the landing in step 6: offer `/ke-pm:pm-project-init`, and if the user is
 not ready for that, hand them the markdown rather than writing it anywhere.
 
 ---

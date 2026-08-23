@@ -1,6 +1,6 @@
 ---
-name: clickup-init
-description: Set up a KE project in ClickUp — verify the ClickUp and Slack connections, find or create the project's List from a template, and record the project's facts in the List description. Use when starting a new KE project, when adopting an existing ClickUp List into the ke-pm workflow, or when a Brief has been written and now needs a home in ClickUp. Triggers on 'set this up in ClickUp', 'create the List', 'start a new project', 'the brief is written, now what', '/ke-pm:clickup-init'. Run once per KE project, before or after the Brief.
+name: pm-project-init
+description: Set up a KE project in ClickUp — verify the ClickUp and Slack connections, walk the user through creating the project's List from the standard template, and record the project's facts in the List description. Use when starting a new KE project, when adopting an existing ClickUp List into the ke-pm workflow, or when a Brief has been written and now needs a home in ClickUp. Triggers on 'set this up in ClickUp', 'create the List', 'start a new project', 'the brief is written, now what', '/ke-pm:pm-project-init'. Run once per KE project, before or after the Brief.
 argument-hint: "[KE project name or idea]"
 allowed-tools:
   - AskUserQuestion
@@ -16,11 +16,11 @@ allowed-tools:
   workflow.
 - Another `ke-pm` skill stopped because the KE project's facts are missing from
   the List.
-- The user explicitly invokes `/ke-pm:clickup-init`.
+- The user explicitly invokes `/ke-pm:pm-project-init`.
 
 **Order does not matter.** A KE project can be set up in ClickUp first and
 briefed after, or briefed first and set up after. This skill handles both, and
-`/ke-pm:brief` handles the mirror case. Run this once per KE project. Running it
+`/ke-pm:pm-project-brief` handles the mirror case. Run this once per KE project. Running it
 again on a List that already has its facts recorded is an update, not a
 re-scaffold — see `references/edge-cases.md`.
 
@@ -30,9 +30,15 @@ re-scaffold — see `references/edge-cases.md`.
 - Optional: an existing Brief, in any form. Asked for in step 2.
 - Everything else is gathered by asking.
 
-Read [GLOSSARY.md](../../GLOSSARY.md) if the difference between a **KE project**,
-a **ClickUp List**, and a **Claude Project** is not already clear. Use those
-terms exactly when talking to the user; never say "project" alone.
+Three different things get called "project", so this skill never says the word
+alone:
+
+- **KE project** — a project as the playbook defines it: bounded scope, one
+  owner, an expected delivery window. The unit this skill sets up.
+- **ClickUp List** — where a KE project lives in ClickUp. One KE project = one
+  List. "The List" always means this.
+- **Claude Project** — a project inside Claude, holding context for one KE
+  project. Nothing is stored there.
 
 ## Workflow
 
@@ -48,7 +54,7 @@ Follow `references/connections.md`. In short:
   account, and it is the name you offer as the owner in step 6.
 - **Slack** — `ToolSearch "+slack"`. If nothing comes back, **warn and
   continue**: say that `/ke-pm:update` and `/ke-pm:standup` will not be able to
-  post when they arrive, and that nothing here or in `/ke-pm:brief` needs it.
+  post when they arrive, and that nothing here or in `/ke-pm:pm-project-brief` needs it.
 
 Report both results in one short status line each before moving on. The user
 should know what is connected before they answer six questions.
@@ -65,7 +71,7 @@ link. Follow `references/existing-brief.md` for what to take from it and how far
 to trust it.
 
 If there is no Brief yet, say that is fine and carry on. It gets written after,
-with `/ke-pm:brief`.
+with `/ke-pm:pm-project-brief`.
 
 ### 3. Identify the squad
 
@@ -83,13 +89,16 @@ before accepting a new one — most "new" squads turn out to be renames.
 
 Discover the structure; never assume it. Using the ClickUp MCP tools, find the
 Space and Folder for that squad and confirm the destination with the user before
-creating anything. If several look plausible, show what you found and ask. If
+moving on — step 5 sends them there by link, so a wrong Folder here means a List
+in the wrong place. If several look plausible, show what you found and ask. If
 the workspace is organised differently than you expect, ask — do not guess a
 destination.
 
 ### 5. Locate or create the List
 
-Ask whether this KE project already has a ClickUp List.
+Ask whether this KE project already has a ClickUp List. If the user already has
+a List URL — from a previous session, from the Claude Project's knowledge, or
+because they just made one — take it now and skip straight to resolving it.
 
 **Adopting an existing List:**
 - Search for it, show what you found, and confirm the match with the user.
@@ -99,7 +108,7 @@ Ask whether this KE project already has a ClickUp List.
 
 **Creating a new List:**
 - **Settle the KE project name first.** Read
-  `../brief/references/naming-rules.md` and apply it before the List exists. If
+  `references/naming-rules.md` and apply it before the List exists. If
   a Brief exists, take the name from it and still check it against the rules — a
   name that has only ever been a document title has never had to stand on its
   own in a report. Renaming later is worse than getting it right now. Offer two
@@ -111,7 +120,7 @@ Ask whether this KE project already has a ClickUp List.
 
   Use `AskUserQuestion` to offer **three distinct candidates**, not three
   rewordings of one idea, following the abbreviation guidance in
-  `../brief/references/naming-rules.md`. Give each one its character count and
+  `references/naming-rules.md`. Give each one its character count and
   say what it leads with. The user can always type their own — take it as-is
   unless it runs well past 22 characters, and even then say so only once.
 
@@ -119,16 +128,23 @@ Ask whether this KE project already has a ClickUp List.
   project is "Address UX issues in HuntWise login flow", 40 characters, which
   ClickUp truncates in every sidebar and picker. The full name is preserved in
   the List description and on the Brief either way.
-- **Pick a template by discovery.** List the workspace's available List
-  templates through the ClickUp MCP and show the candidates to the user with
-  their names. If `t-901419142237` is among them, mark it as the expected
-  default — but always show the list and always let the user choose. Never apply
-  a template without showing what you are applying.
-- Create the List from the chosen template in the confirmed Folder.
-- If the MCP cannot list or apply templates, say so plainly, create the List
-  without one, and tell the user to apply the template through the ClickUp UI.
-  Record `Template applied: none (apply manually)` in the description. Do not
-  silently skip it — see `references/troubleshooting.md`.
+- **Hand the creation to the user.** The ClickUp MCP has no template tools —
+  it cannot enumerate templates and cannot create a List from one. So Claude
+  does not create the List. Follow `references/creating-the-list.md`: send one
+  message containing a template-center deep link that opens `t-901419142237`
+  ready to use, that template's name — **Product Roadmap Project Template** — as
+  the fallback if the link misfires, the destination named in words as Space →
+  Folder (the link cannot carry it), and the exact List name to type. Then stop
+  and wait — do not gather facts for a List that does not exist yet.
+- **Take the URL back and resolve it.** The user pastes the List URL; pull the
+  List ID out of it and fetch the List. Confirm the name matches, that it landed
+  in the confirmed Folder, and that the template looks applied. Then read the
+  description: no fact block means a fresh List, carry on to step 6; a fact block
+  already there means this is an update — see `references/edge-cases.md`.
+- Do not create the List with `clickup_create_list_in_folder` as a shortcut. A
+  template-less List looks identical to a correct one until someone needs a view
+  that is not there. Creating bare is a fallback the user chooses when the
+  template is unavailable to them, not one you take on their behalf.
 
 ### 6. Gather the KE project's facts
 
@@ -189,12 +205,12 @@ that already meets the standard through an interview it does not need.
 
 **If it does not**, say specifically what is off — a missing `Users` section, a
 `Background` section that is not part of the template, requirements that belong
-on tasks — and point the user at `/ke-pm:brief` to refine it. That skill owns
+on tasks — and point the user at `/ke-pm:pm-project-brief` to refine it. That skill owns
 the template, the section order, and the style pass. Do not fix it yourself
 here and do not post it as-is.
 
 If there is no Brief yet, say so plainly — the KE project is not ready to work
-until it has one, and `/ke-pm:brief` is the next step.
+until it has one, and `/ke-pm:pm-project-brief` is the next step.
 
 ### 9. Set up the Claude Project
 
@@ -204,6 +220,11 @@ You cannot create a Claude Project — no tool does that. Tell the user how, and
 what to keep in it: name it after the KE project, put the ClickUp List URL in
 its knowledge, add the raw material they are working from, and keep decisions
 flowing back to ClickUp rather than living in the chat.
+
+The List URL matters more than it looks. This skill keeps no state, so that URL
+is the whole handle: given it, a later session can fetch the List, read the
+description, and tell whether the KE project has been set up. Say that when you
+ask them to save it.
 
 If they are already working inside a Claude Project for this KE project, just
 confirm the List URL is in its knowledge and move on. If they would rather not
@@ -220,7 +241,9 @@ If this is a roadmap project, say so here too: a weekly project update in
 hear it now than the first week it is missed.
 
 ## Output
-- A ClickUp List for the KE project, created from a chosen template or adopted.
+- A ClickUp List for the KE project — created by the user from the standard
+  template, or adopted. This skill never creates it; see
+  `references/creating-the-list.md` for why.
 - The KE project's facts in that List's description, and the projected target as
   its due date.
 - Spoken guidance on setting up the user's Claude Project. Nothing is written
@@ -230,11 +253,12 @@ hear it now than the first week it is missed.
 ## More
 - Connection checks and setup instructions: `references/connections.md`
 - Working from a Brief that already exists: `references/existing-brief.md`
-- ClickUp conventions, template discovery, doc naming: `references/clickup-conventions.md`
+- Handing List creation to the user, and taking the URL back: `references/creating-the-list.md`
+- ClickUp conventions, doc naming: `references/clickup-conventions.md`
 - Squads and team emojis: `references/squads.md`
 - The fact block, and what goes in the due date: `references/list-description.md`
 - Setting up the Claude Project and what belongs in it: `references/claude-project.md`
-- KE project naming rules: `../brief/references/naming-rules.md`
+- KE project naming rules: `references/naming-rules.md`
 - Common failures and fixes: `references/troubleshooting.md`
 - Edge cases (re-running it, adopting a populated List): `references/edge-cases.md`
 - Worked examples: `examples/new-list-from-template.md`, `examples/adopting-an-existing-list.md`, `examples/brief-first.md`

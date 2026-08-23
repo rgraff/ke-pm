@@ -4,7 +4,7 @@
 
 Claude Code skills for running a KE project the way the Kalkomey playbook
 describes. Phase 1 covers setting the KE project up in ClickUp
-(`/ke-pm:clickup-init`) and writing its Brief (`/ke-pm:brief`). Either can come
+(`/ke-pm:pm-project-init`) and writing its Brief (`/ke-pm:pm-project-brief`). Either can come
 first — neither skill may assume the other has already run.
 
 Read [GLOSSARY.md](GLOSSARY.md) before writing any skill prose. "Project" alone
@@ -24,7 +24,7 @@ That line is provenance so we can spot drift; it is not a runtime dependency. No
 skill fetches or reads the playbook, and skill output does not link to it.
 
 A Claude Project may hold working context — transcripts, notes, drafts — but
-never state of record, and no skill can write to one. When `clickup-init` talks about
+never state of record, and no skill can write to one. When `pm-project-init` talks about
 Claude Projects it is giving the user instructions, not doing something.
 
 **3. Discover, never hardcode.** Space IDs, Folder IDs, List templates — all
@@ -39,17 +39,17 @@ reorganisation should not break a skill.
 └── marketplace.json       # claude plugin marketplace add kalkomey/ke-pm
 
 commands/                  # thin wrappers — invoke the matching skill, nothing else
-├── clickup-init.md        # → /ke-pm:clickup-init
-└── brief.md               # → /ke-pm:brief
+├── pm-project-init.md     # → /ke-pm:pm-project-init
+└── pm-project-brief.md    # → /ke-pm:pm-project-brief
 
 skills/
-├── clickup-init/
+├── pm-project-init/
 │   ├── SKILL.md           # the active workflow
-│   ├── references/        # connections, existing brief, clickup conventions,
-│   │                      # squads, list description, claude project,
-│   │                      # troubleshooting, edge cases
+│   ├── references/        # connections, existing brief, creating the list,
+│   │                      # clickup conventions, squads, list description,
+│   │                      # claude project, troubleshooting, edge cases
 │   └── examples/          # worked scenarios
-└── brief/
+└── pm-project-brief/
     ├── SKILL.md
     ├── references/        # brief template, naming rules, writing style,
     │                      # interview guide, troubleshooting, edge cases
@@ -68,12 +68,23 @@ GLOSSARY.md                # KE project / ClickUp List / Claude Project
   them. Vendored playbook guidance, troubleshooting, and worked scenarios live
   here so the workflow stays short.
 
-### Shared references
+### Skill folders must be self-contained
 
-`skills/clickup-init/SKILL.md` reads the naming rules from
-`../brief/references/naming-rules.md` rather than keeping a second copy — a KE
-project gets named in both skills and the rules must not drift between them.
-Cross-skill reference reads are fine within the plugin; duplicated rules are not.
+A skill folder may not reference anything outside itself — no `../other-skill/`
+paths, no files at the repo root. Claude Code would resolve them, but each skill
+is also zipped on its own for claude.ai, and a path that escapes the folder
+silently drops that guidance from the uploaded skill.
+
+Two consequences:
+
+- **`naming-rules.md` exists twice**, in `skills/pm-project-brief/references/` and
+  `skills/pm-project-init/references/`. Both skills name KE projects and the rules
+  must not diverge. `./scripts/check-shared.sh` fails if the copies differ; edit
+  one and copy it over the other.
+- **The three-term glossary is inlined** in both `SKILL.md` files rather than
+  linked to `GLOSSARY.md`. The root file stays as the human-readable reference.
+
+`./scripts/package.sh` builds the per-skill zips and runs the drift check first.
 
 ## Adding a skill
 

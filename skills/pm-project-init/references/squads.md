@@ -13,7 +13,7 @@ leads its Slack posts — the daily stand-up thread opener and the weekly projec
 update header. That emoji is what makes those channels scannable by team, so it
 is never optional and never improvised.
 
-`/ke-pm:clickup-init` records the squad and its emoji in the List description.
+`/ke-pm:pm-project-init` records the squad and its emoji in the List description.
 It is the only place either gets captured, and `/ke-pm:update` and
 `/ke-pm:standup` read it back from there.
 

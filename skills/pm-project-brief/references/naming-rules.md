@@ -3,7 +3,7 @@
 > Source: kalkomey/playbook — `standards/project-name-and-briefs.md`
 > (as of 2026-08-15)
 
-Read by `/ke-pm:brief` when validating a name, and by `/ke-pm:clickup-init` before it
+Read by `/ke-pm:pm-project-brief` when validating a name, and by `/ke-pm:pm-project-init` before it
 creates a List. One copy, so the two skills cannot drift apart.
 
 The name is a **short phrase**, not a mini write-up. It must be specific enough
